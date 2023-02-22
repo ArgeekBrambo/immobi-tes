@@ -27,6 +27,20 @@ class ControllerDepartment {
             next(err);
         }
     }
+
+    static async update(req, res, next) {
+        try {
+            const data = await table_department.update(req.body, {
+                where: {
+                    id: req.params.id
+                },
+                returning: true
+            });
+            res.status(200).json(data[1][0]);
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = ControllerDepartment;
