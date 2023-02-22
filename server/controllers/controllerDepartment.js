@@ -41,6 +41,19 @@ class ControllerDepartment {
             next(err);
         }
     }
+
+    static async delete(req, res, next) {
+        try {
+            const data = await table_department.destroy({
+                where: {
+                    id: req.params.id
+                }
+            });
+            res.status(200).json({ message: 'Department deleted' });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = ControllerDepartment;
