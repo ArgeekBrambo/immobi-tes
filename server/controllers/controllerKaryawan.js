@@ -82,8 +82,13 @@ class ControllerKaryawan {
                 gender,
                 tanggal_lahir,
                 alamat
+            },{
+                where: {
+                    id
+                },
+                returning: true
             })
-            res.status(200).json(data);
+            res.status(200).json(data[1][0]);
         } catch (error) {
             next(error);
         }
@@ -97,7 +102,7 @@ class ControllerKaryawan {
                     id
                 }
             });
-            res.status(200).json(data);
+            res.status(200).json({ message: 'Karyawan deleted' });
         } catch (err) {
             next(err);
         }
