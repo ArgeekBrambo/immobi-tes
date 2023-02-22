@@ -64,44 +64,44 @@ class ControllerKaryawan {
         }
     }
 
-    // static async update(req, res, next) {
-    //     try {
-    //         const { id } = req.params;
-    //         const { id_department, id_jabatan, nama_karyawan, alamat, no_telp, email, tanggal_masuk, tanggal_keluar } = req.body;
-    //         const data = await table_karyawan.update({
-    //             id_department,
-    //             id_jabatan,
-    //             nama_karyawan,
-    //             alamat,
-    //             no_telp,
-    //             email,
-    //             tanggal_masuk,
-    //             tanggal_keluar
-    //         }, {
-    //             where: {
-    //                 id
-    //             },
-    //             returning: true
-    //         });
-    //         res.status(200).json(data[1][0]);
-    //     } catch (err) {
-    //         next(err);
-    //     }
-    // }
+    static async update(req, res, next) {
+        try {
+            const { id } = req.params;
+            const {
+                name,
+                id_jabatan,
+                age,
+                gender,
+                tanggal_lahir,
+                alamat
+            } = req.body;
+            const data = await table_karyawan.update({
+                name,
+                id_jabatan,
+                age,
+                gender,
+                tanggal_lahir,
+                alamat
+            })
+            res.status(200).json(data);
+        } catch (error) {
+            next(error);
+        }
+    }
 
-    // static async delete(req, res, next) {
-    //     try {
-    //         const { id } = req.params;
-    //         const data = await table_karyawan.destroy({
-    //             where: {
-    //                 id
-    //             }
-    //         });
-    //         res.status(200).json({ message: 'Karyawan deleted' });
-    //     } catch (err) {
-    //         next(err);
-    //     }
-    // }
+    static async delete(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = await table_karyawan.destroy({
+                where: {
+                    id
+                }
+            });
+            res.status(200).json(data);
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = ControllerKaryawan;
