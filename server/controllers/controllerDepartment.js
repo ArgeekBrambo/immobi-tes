@@ -18,6 +18,15 @@ class ControllerDepartment {
             next(err);
         }
     }
+
+    static async getOne(req, res, next) {
+        try {
+            const data = await table_department.findByPk(req.params.id);
+            res.status(200).json(data);
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = ControllerDepartment;
