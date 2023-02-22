@@ -62,6 +62,20 @@ class ControllerJabatan {
             next(err);
         }
     }
+
+    static async delete(req, res, next) {
+        try {
+            const { id } = req.params;
+            const data = await table_jabatan.destroy({
+                where: {
+                    id
+                }
+            });
+            res.status(200).json({ message: 'Jabatan deleted' });
+        } catch (err) {
+            next(err);
+        }
+    }
 }
 
 module.exports = ControllerJabatan;
