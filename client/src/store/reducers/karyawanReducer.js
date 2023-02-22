@@ -19,7 +19,7 @@ export const karyawanReducer = (state = initialState, action) => {
                 karyawans: action.payload
             }
         case GET_KARYAWAN:
-            console.log(action.payload);
+            // console.log(action.payload);
             return {
                 ...state,
                 karyawan: action.payload

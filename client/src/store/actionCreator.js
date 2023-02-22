@@ -54,6 +54,9 @@ export const getJabatans = () => {
 }
 
 export const getJabatanByDepartment = (departmentId) => {
+    // console.log('====================================');
+    // console.log(departmentId);
+    // console.log('====================================');
     return async dispatch => {
         try {
             const { data } = await axios.get(`${server}/jabatan/department/${departmentId}`);

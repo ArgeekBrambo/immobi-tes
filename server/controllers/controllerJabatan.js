@@ -13,7 +13,10 @@ class ControllerJabatan {
     static async create(req, res, next) {
         try {
             const {id_department, nama_jabatan} = req.body;
-            const data = await table_jabatan.create({id_department, nama_jabatan});
+            const data = await table_jabatan.create({
+                id_department: +id_department,
+                nama_jabatan
+            });
             res.status(201).json(data);
         } catch (err) {
             next(err);
@@ -23,7 +26,7 @@ class ControllerJabatan {
     static async findByPk(req, res, next) {
         try {
             const { id } = req.params;
-            const data = await table_jabatan.findByPk(id);
+            const data = await table_jabatan.findByPk(+id);
             res.status(200).json(data);
         } catch (err) {
             next(err);
@@ -35,7 +38,7 @@ class ControllerJabatan {
             const { id } = req.params;
             const data = await table_jabatan.findAll({
                 where: {
-                    id_department: id
+                    id_department: +id
                 }
             });
             res.status(200).json(data);
@@ -49,7 +52,7 @@ class ControllerJabatan {
             const { id } = req.params;
             const { id_department, nama_jabatan } = req.body;
             const data = await table_jabatan.update({
-                id_department,
+                id_department: +id_department,
                 nama_jabatan
             }, {
                 where: {
@@ -68,7 +71,7 @@ class ControllerJabatan {
             const { id } = req.params;
             const data = await table_jabatan.destroy({
                 where: {
-                    id
+                    id: +id
                 }
             });
             res.status(200).json({ message: 'Jabatan deleted' });

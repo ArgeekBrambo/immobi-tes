@@ -6,7 +6,7 @@ import {
     getJabatanByDepartment,
     addKaryawan,
     editKaryawan,
-    getKaryawan
+    getKaryawan,
 } from "../store/actionCreator";
 import { IS_EDIT, GET_KARYAWAN } from "../store/actionType";
 
@@ -30,8 +30,8 @@ const AddEditKaryawan = () => {
         tanggal_lahir: "",
         alamat: "",
         table_jabatan: {
-            id_department: ""
-        }
+            id_department: "",
+        },
     });
 
     const [department, setDepartment] = useState("");
@@ -44,7 +44,7 @@ const AddEditKaryawan = () => {
     const updateKaryawan = () => {
         dispatch(editKaryawan(id, newKaryawan));
         navigate("/karyawan");
-    }
+    };
 
     const handleCancel = () => {
         // console.log("cancel");
@@ -56,8 +56,8 @@ const AddEditKaryawan = () => {
             tanggal_lahir: "",
             alamat: "",
             table_jabatan: {
-                id_department: ""
-            }
+                id_department: "",
+            },
         });
         dispatch({
             type: IS_EDIT,
@@ -72,24 +72,25 @@ const AddEditKaryawan = () => {
     useEffect(() => {
         dispatch(getDepartments());
         dispatch(getKaryawan(id));
-    }, [])
+    }, []);
 
     useEffect(() => {
-        console.log(karyawan, 'karyawan');
-        setNewKaryawan({
+        if (karyawan.id) {
+          setNewKaryawan({
             name: karyawan.name,
             id_jabatan: karyawan.id_jabatan,
             age: karyawan.age,
             gender: karyawan.gender,
             tanggal_lahir: karyawan.tanggal_lahir,
             alamat: karyawan.alamat,
-            table_jabatan: {
-                id_department: karyawan.table_jabatan?.id_department
-            }
-        })
-        console.log(newKaryawan, "newKaryawan");
-        setDepartment(newKaryawan.table_jabatan?.id_department);
-    }, [karyawan])
+            table_jabatan: karyawan.table_jabatan,
+          });
+      
+          if (karyawan.table_jabatan?.id_department) {
+            setDepartment(karyawan.table_jabatan?.id_department);
+          }
+        }
+      }, [karyawan]);
 
     useEffect(() => {
         // console.log(department, "masuk");
@@ -133,14 +134,16 @@ const AddEditKaryawan = () => {
                             <select
                                 className="select select-bordered"
                                 onChange={(e) => setDepartment(e.target.value)}
-                                // defaultValue={console.log(karyawan)}
-                                defaultValue={ department }
+                                // defaultValue={console.log(karyawan)
                             >
-                                <option value="0">Select Department</option>
+                                <option value="0" disabled selected>Select Department</option>
                                 {departments.map((department) => (
                                     <option
                                         value={department.id}
                                         key={department.id}
+                                        selected={
+                                            department.id == newKaryawan.table_jabatan?.id_department ? 'selected' : ''
+                                        }
                                     >
                                         {department.nama_department}
                                     </option>
@@ -159,11 +162,22 @@ const AddEditKaryawan = () => {
                                         id_jabatan: e.target.value,
                                     })
                                 }
+                                onInput={(e) => (
+                                    setNewKaryawan({
+                                        ...newKaryawan,
+                                        id_jabatan: e.target.value,
+                                    })
+                                )}
                                 required
                             >
                                 <option value="0">Select Jabatan</option>
                                 {jabatansByDepartment.map((jabatan, index) => (
-                                    <option key={index} value={jabatan.id}>
+                                    <option key={index} value={jabatan.id}
+                                        selected={
+                                            jabatan.id == newKaryawan.id_jabatan ? 'selected' : ''
+                                        }
+                                        
+                                    >
                                         {jabatan.nama_jabatan}
                                     </option>
                                 ))}
@@ -267,8 +281,7 @@ const AddEditKaryawan = () => {
                                 }}
                                 required
                                 defaultValue={isEdit ? newKaryawan.alamat : ""}
-                            >
-                            </textarea>
+                            ></textarea>
                         </div>
                     </div>
                 </div>
@@ -276,6 +289,7 @@ const AddEditKaryawan = () => {
                     {isEdit ? (
                         <button
                             className="btn btn-primary"
+                            type="button"
                             onClick={() => {
                                 updateKaryawan();
                             }}
@@ -285,6 +299,7 @@ const AddEditKaryawan = () => {
                     ) : (
                         <button
                             className="btn btn-active btn-primary"
+                            type="button"
                             onClick={() => {
                                 handleAddKaryawan();
                             }}

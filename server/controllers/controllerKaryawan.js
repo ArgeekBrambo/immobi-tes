@@ -66,6 +66,7 @@ class ControllerKaryawan {
 
     static async update(req, res, next) {
         try {
+            console.log(req.body, '<<< req.body');
             const { id } = req.params;
             const {
                 name,

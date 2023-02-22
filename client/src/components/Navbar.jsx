@@ -42,7 +42,7 @@ const Navbar = () => {
                 </div>
             </div>
             <div className="navbar-center">
-                <a className="btn btn-ghost normal-case text-xl">Immobi Tes</a>
+                <Link to={'/'} className="btn btn-ghost normal-case text-xl">Immobi Tes</Link>
             </div>
             <div className="navbar-end">
                 <button className="btn btn-ghost btn-circle">

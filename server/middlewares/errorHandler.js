@@ -22,6 +22,14 @@ function errorHandler (err, req, res, next) {
             status = 500;
             message = 'Database connection error';
             break;
+        case 'SequelizeDatabaseError':
+            status = 500;
+            message = 'Database error';
+            break;
+        case 'SequelizeForeignKeyConstraintError':
+            status = 400;
+            message = 'Foreign key constraint error';
+            break;
     }
 
     res.status(status).json({ message });
