@@ -1,14 +1,22 @@
 const { table_department } = require('../models');
 
 class ControllerDepartment {
-    static getAll(req, res) {
-        table_department.findAll()
-            .then(data => {
-                res.status(200).json(data);
-            })
-            .catch(err => {
-                res.status(500).json(err);
-            })
+    static async getAll(req, res, next) {
+        try {
+            const data = await table_department.findAll();
+            res.status(200).json(data);
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async create(req, res, next) {
+        try {
+            const data = await table_department.create(req.body);
+            res.status(201).json(data);
+        } catch (err) {
+            next(err);
+        }
     }
 }
 
