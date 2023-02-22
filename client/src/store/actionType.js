@@ -1,0 +1,6 @@
+export const GET_DEPARTMENTS = "GET_DEPARTMENTS";
+export const GET_DEPARTMENT = "GET_DEPARTMENT";
+export const GET_JABATANS = "GET_JABATANS";
+export const GET_JABATAN = "GET_JABATAN";
+export const GET_KARYAWANS = "GET_KARYAWANS";
+export const GET_KARYAWAN = "GET_KARYAWAN";

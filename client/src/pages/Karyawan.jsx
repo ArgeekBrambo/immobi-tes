@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import KaryawanTable from "../components/KaryawanTable";
 
 const Karyawan = () => {
-  return (
-    <div>Karyawan</div>
-  )
-}
+    return (
+        <div>
+            <KaryawanTable />
+        </div>
+    );
+};
 
-export default Karyawan
+export default Karyawan;

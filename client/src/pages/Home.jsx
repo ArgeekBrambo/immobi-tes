@@ -8,7 +8,7 @@ const Home = () => {
             <div className="card w-96 bg-base-100 shadow-xl">
                 <figure>
                     <img
-                        src="https://source.unsplash.com/1600x900/?staff"
+                        src="https://source.unsplash.com/1600x900/?employee"
                         alt="Karyawan"
                     />
                 </figure>
