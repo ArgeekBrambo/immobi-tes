@@ -12,7 +12,8 @@ class ControllerDepartment {
 
     static async create(req, res, next) {
         try {
-            const data = await table_department.create(req.body);
+            const { nama_department } = req.body;
+            const data = await table_department.create({ nama_department });
             res.status(201).json(data);
         } catch (err) {
             next(err);
@@ -21,7 +22,8 @@ class ControllerDepartment {
 
     static async getOne(req, res, next) {
         try {
-            const data = await table_department.findByPk(req.params.id);
+            const { id } = req.params;
+            const data = await table_department.findByPk(id);
             res.status(200).json(data);
         } catch (err) {
             next(err);
@@ -30,9 +32,10 @@ class ControllerDepartment {
 
     static async update(req, res, next) {
         try {
+            const { id } = req.params;
             const data = await table_department.update(req.body, {
                 where: {
-                    id: req.params.id
+                    id
                 },
                 returning: true
             });
@@ -44,9 +47,10 @@ class ControllerDepartment {
 
     static async delete(req, res, next) {
         try {
+            const { id } = req.params;
             const data = await table_department.destroy({
                 where: {
-                    id: req.params.id
+                    id
                 }
             });
             res.status(200).json({ message: 'Department deleted' });
