@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       table_karyawan.belongsTo(models.table_jabatan, {
         foreignKey: 'id_jabatan'
-      })
+      });
     }
   }
   table_karyawan.init({
