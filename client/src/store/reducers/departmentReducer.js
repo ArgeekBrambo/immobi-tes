@@ -8,6 +8,7 @@ const initialState = {
 export const departmentReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_DEPARTMENTS:
+            // console.log(action.payload, "ini di reducer");
             return {
                 ...state,
                 departments: action.payload

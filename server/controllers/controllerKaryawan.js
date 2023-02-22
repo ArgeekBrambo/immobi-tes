@@ -32,7 +32,7 @@ class ControllerKaryawan {
             const data = await table_karyawan.create({
                 name,
                 id_jabatan,
-                age,
+                age: +age,
                 gender,
                 tanggal_lahir,
                 alamat
@@ -78,7 +78,7 @@ class ControllerKaryawan {
             const data = await table_karyawan.update({
                 name,
                 id_jabatan,
-                age,
+                age: +age,
                 gender,
                 tanggal_lahir,
                 alamat

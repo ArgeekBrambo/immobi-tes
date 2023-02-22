@@ -1,12 +1,14 @@
 import {
     GET_KARYAWAN,
     GET_KARYAWANS,
+    IS_EDIT
 } from "../actionType";
 
 
 const initialState = {
     karyawans: [],
-    karyawan: {}
+    karyawan: {},
+    isEdit: false
 }
 
 export const karyawanReducer = (state = initialState, action) => {
@@ -17,10 +19,18 @@ export const karyawanReducer = (state = initialState, action) => {
                 karyawans: action.payload
             }
         case GET_KARYAWAN:
+            console.log(action.payload);
             return {
                 ...state,
                 karyawan: action.payload
             }
+
+        case IS_EDIT:
+            return {
+                ...state,
+                isEdit: action.payload
+            }
+
         default:
             return state;
     }

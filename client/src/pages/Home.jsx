@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getDepartments, getJabatans, getKaryawans } from "../store/actionCreator";
 
 const Home = () => {
+    const dispatch = useDispatch();
+    const { departments } = useSelector((state) => state.departmentReducer);
+    const { jabatans } = useSelector((state) => state.jabatanReducer);
+    const { karyawans } = useSelector((state) => state.karyawanReducer);
+
+    useEffect(() => {
+        dispatch(getDepartments());
+        dispatch(getJabatans());
+        dispatch(getKaryawans());
+    }, []);
+
     return (
         <div
             className="flex flex-row items-center justify-center w-full h-full gap-8 pt-5"
@@ -14,7 +27,7 @@ const Home = () => {
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">Karyawan</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>{karyawans.length}</p>
                     <div className="card-actions justify-end">
                         <button className="btn btn-primary">Buy Now</button>
                     </div>
@@ -29,7 +42,7 @@ const Home = () => {
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">Jabatan</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>{jabatans.length}</p>
                     <div className="card-actions justify-end">
                         <button className="btn btn-primary">Buy Now</button>
                     </div>
@@ -44,7 +57,7 @@ const Home = () => {
                 </figure>
                 <div className="card-body">
                     <h2 className="card-title">Department</h2>
-                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                    <p>{departments.length}</p>
                     <div className="card-actions justify-end">
                         <button className="btn btn-primary">Buy Now</button>
                     </div>
